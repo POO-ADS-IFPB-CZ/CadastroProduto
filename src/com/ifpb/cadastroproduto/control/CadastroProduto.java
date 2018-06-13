@@ -14,6 +14,26 @@ public class CadastroProduto {
         quantidade = 0;
     }
 
+    public boolean salvar(Produto produto, int posicao){
+        if(posicao>=0 && posicao<=quantidade){
+
+            if(isCheio()){
+                aumentarArray();
+            }
+
+            for(int i = quantidade; i>posicao; i--){
+                produtos[i] = produtos[i-1];
+            }
+
+            produtos[posicao] = produto;
+            quantidade++;
+            return true;
+
+        }else{
+            return false;
+        }
+    }
+
     public boolean salvar(Produto produto){
 
         if(isCheio()){
@@ -52,6 +72,14 @@ public class CadastroProduto {
             }
         }
         return -1;
+    }
+
+    public Produto buscarPorPosicao(int posicao){
+        if(posicao >=0 && posicao < quantidade){
+            return produtos[posicao];
+        }else{
+            return null;
+        }
     }
 
     public Produto[] listar(){
